@@ -146,7 +146,7 @@ export default function Index({ publication }: Props) {
 					{/* Social Links */}
 					<section className="mt-12">
 						<h2 className="mb-8 text-center text-3xl font-bold text-slate-900 dark:text-white">
-							Let&ldquo;s Connect
+							Let&apos;s Connect
 						</h2>
 						<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
 							<a
