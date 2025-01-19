@@ -1,6 +1,7 @@
 import request from 'graphql-request';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import { FaEnvelope, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
@@ -34,7 +35,7 @@ export default function Index({ publication }: Props) {
 					{/* Hero Section */}
 					<section className="flex flex-col items-center text-center">
 						<div className="mb-8">
-							<img
+							<Image
 								src={publication.author.profilePicture}
 								alt={publication.author.name}
 								className="h-40 w-40 rounded-full object-cover shadow-lg"
@@ -53,25 +54,26 @@ export default function Index({ publication }: Props) {
 						<h2 className="text-3xl font-bold text-slate-900 dark:text-white">About Me</h2>
 						<div className="space-y-6 text-lg text-slate-600 dark:text-slate-400">
 							<p>
-								Welcome to The Creative Developer! You can call me "Ias". I'm a passionate
-								developer, educator, and artist who sees technology as a canvas for creativity and
-								innovation.
+								Welcome to The Creative Developer! You can call me &ldquo;Ias&rdquo;. I&apos;m a
+								passionate developer, educator, and artist who sees technology as a canvas for
+								creativity and innovation.
 							</p>
 							<p>
 								I thrive on solving complex problems, designing scalable systems, and empowering
 								others to explore the exciting world of technology. With experience teaching
 								countless aspiring developers, refactoring legacy systems into streamlined
-								architectures, and embracing creativity in all aspects of my work, I've built my
-								career at the intersection of logic and imagination.
+								architectures, and embracing creativity in all aspects of my work, I&apos;ve built
+								my career at the intersection of logic and imagination.
 							</p>
 							<p>
-								Beyond code, I'm a lifelong learner, an artist with a talent for creating lifelike
-								pen drawings, and a teacher deeply committed to making technology accessible and
-								inspiring to everyone.
+								Beyond code, I&apos;m a lifelong learner, an artist with a talent for creating
+								lifelike pen drawings, and a teacher deeply committed to making technology
+								accessible and inspiring to everyone.
 							</p>
 							<p>
 								This blog is my space to share insights, lessons, and creative perspectives.
-								Together, let's explore the boundless possibilities of technology and innovation! 🚀
+								Together, let&apos;s explore the boundless possibilities of technology and
+								innovation! 🚀
 							</p>
 						</div>
 					</section>
@@ -99,7 +101,7 @@ export default function Index({ publication }: Props) {
 									className="overflow-hidden rounded-lg bg-slate-100 shadow-md transition-transform hover:scale-[1.02] dark:bg-slate-800"
 								>
 									<div className="aspect-w-16 aspect-h-9">
-										<img
+										<Image
 											src={artwork.image}
 											alt={artwork.title}
 											className="h-full w-full object-cover"
