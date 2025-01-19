@@ -10,14 +10,14 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Container } from '../components/container';
-import { AppProvider } from '../components/contexts/appContext';
-import { CoverImage } from '../components/cover-image';
-import { DateFormatter } from '../components/date-formatter';
-import { Footer } from '../components/footer';
-import { Layout } from '../components/layout';
-import { MarkdownToHtml } from '../components/markdown-to-html';
-import { PersonalHeader } from '../components/personal-theme-header';
+import { Container } from '../../components/container';
+import { AppProvider } from '../../components/contexts/appContext';
+import { CoverImage } from '../../components/cover-image';
+import { DateFormatter } from '../../components/date-formatter';
+import { Footer } from '../../components/footer';
+import { Layout } from '../../components/layout';
+import { MarkdownToHtml } from '../../components/markdown-to-html';
+import { PersonalHeader } from '../../components/personal-theme-header';
 import {
 	PageByPublicationDocument,
 	PostFullFragment,
@@ -25,7 +25,7 @@ import {
 	SinglePostByPublicationDocument,
 	SlugPostsByPublicationDocument,
 	StaticPageFragment,
-} from '../generated/graphql';
+} from '../../generated/graphql';
 // @ts-ignore
 import { triggerCustomWidgetEmbed } from '@starter-kit/utils/trigger-custom-widget-embed';
 
@@ -131,7 +131,7 @@ const Post = ({ publication, post }: PostProps) => {
 			<h1 className="text-4xl font-bold leading-tight tracking-tight text-black dark:text-white">
 				{post.title}
 			</h1>
-			<div className="flex tracking-tight gap-2 text-neutral-600 dark:text-neutral-400">
+			<div className="flex gap-2 tracking-tight text-neutral-600 dark:text-neutral-400">
 				<DateFormatter dateString={post.publishedAt} />
 				{'•'}
 				<span>{post.readTimeInMinutes} min read</span>

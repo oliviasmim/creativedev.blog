@@ -20,9 +20,19 @@ export const PersonalHeader = () => {
 
 	const navList = (
 		<ul className="flex list-none flex-row items-center gap-4 text-xs font-semibold uppercase tracking-tight text-neutral-600 dark:text-neutral-300">
+			<li>
+				<Link href="/blog" className="hover:underline">
+					Blog
+				</Link>
+			</li>
+			<li>
+				<Link href="/" className="hover:underline">
+					About
+				</Link>
+			</li>
 			{visibleItems.map((item) => (
 				<li key={item.url}>
-					<a href={item.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+					<a href={item.url} className="hover:underline">
 						{item.label}
 					</a>
 				</li>
@@ -42,12 +52,7 @@ export const PersonalHeader = () => {
 							>
 								{hiddenItems.map((item) => (
 									<DropdownMenu.Item asChild key={item.url}>
-										<a
-											href={item.url}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="block w-full p-2 hover:underline"
-										>
+										<a href={item.url} className="block w-full p-2 hover:underline">
 											{item.label}
 										</a>
 									</DropdownMenu.Item>
