@@ -36,8 +36,8 @@ export default function Index({ publication }: Props) {
 					<section className="flex flex-col items-center text-center">
 						<div className="mb-8">
 							<Image
-								src={publication.author.profilePicture}
-								alt={publication.author.name}
+								src={publication.author.profilePicture || ''}
+								alt={publication.author.name || ''}
 								className="h-40 w-40 rounded-full object-cover shadow-lg"
 							/>
 						</div>
