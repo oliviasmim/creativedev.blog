@@ -86,6 +86,18 @@ export type AddCommentPayload = {
   comment?: Maybe<Comment>;
 };
 
+export type AddContentBlockInput = {
+  content: Scalars['String']['input'];
+  embedId: Scalars['String']['input'];
+  label: Scalars['String']['input'];
+  projectId: Scalars['ID']['input'];
+};
+
+export type AddContentBlockPayload = {
+  __typename?: 'AddContentBlockPayload';
+  project: DocumentationProject;
+};
+
 export type AddCustomMdxComponentInput = {
   code: Scalars['String']['input'];
   componentId: Scalars['String']['input'];
@@ -192,6 +204,12 @@ export type Badge = Node & {
   name: Scalars['String']['output'];
   /** A flag to determine if the badge is hidden. */
   suppressed?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Contains information about banner image options of the post. Like URL of the banner image, attribution, etc. */
+export type BannerImageOptionsInput = {
+  /** The URL of the banner image. */
+  bannerImageURL?: InputMaybe<Scalars['String']['input']>;
 };
 
 /**
@@ -1028,6 +1046,8 @@ export type CreateDocumentationSectionPayload = {
 };
 
 export type CreateDraftInput = {
+  /** Options for the banner image of the resulting draft. */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /** Ids of the co-authors of the resulting draft. */
   coAuthors?: InputMaybe<Array<Scalars['ObjectId']['input']>>;
   /** Content of the resulting draft in markdown format. */
@@ -1220,6 +1240,16 @@ export enum DefaultDocsTheme {
   Dark = 'DARK',
   Light = 'LIGHT'
 }
+
+export type DeleteContentBlockInput = {
+  embedId: Scalars['String']['input'];
+  projectId: Scalars['ID']['input'];
+};
+
+export type DeleteContentBlockPayload = {
+  __typename?: 'DeleteContentBlockPayload';
+  project: DocumentationProject;
+};
 
 export type DeleteCustomMdxComponentInput = {
   componentId: Scalars['String']['input'];
@@ -1751,6 +1781,18 @@ export type DocumentationProjectAppearanceInput = {
   primaryColor?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type DocumentationProjectContentBlock = Node & {
+  __typename?: 'DocumentationProjectContentBlock';
+  /** The MDX string of the content block. */
+  content: Scalars['String']['output'];
+  /** embedId, which can be used to embed the content block in the editor. */
+  embedId: Scalars['String']['output'];
+  /** The unique identifier for the content block */
+  id: Scalars['ID']['output'];
+  /** label, can be used to identify the content block from the dropdown in the editor. */
+  label: Scalars['String']['output'];
+};
+
 export type DocumentationProjectCustomComponent = Node & {
   __typename?: 'DocumentationProjectCustomComponent';
   /** The code of the custom component. */
@@ -2084,6 +2126,11 @@ export type Draft = Node & {
   __typename?: 'Draft';
   /** The author of the draft. */
   author: User;
+  /**
+   * The banner image preference of the draft. Contains banner image URL and other details.
+   * Similar to cover image but user can use banner image as alternate cover on single post page.
+   */
+  bannerImage?: Maybe<DraftBannerImage>;
   canonicalUrl?: Maybe<Scalars['String']['output']>;
   /**
    * Returns the user details of the co-authors of the post.
@@ -2151,6 +2198,13 @@ export type DraftBackup = {
   at?: Maybe<Scalars['DateTime']['output']>;
   /** The status of the backup i.e., success or failure. */
   status?: Maybe<BackupStatus>;
+};
+
+/** Contains information about the banner image of the draft. */
+export type DraftBannerImage = {
+  __typename?: 'DraftBannerImage';
+  /** The URL of the banner image. */
+  url: Scalars['String']['output'];
 };
 
 /**
@@ -3167,6 +3221,7 @@ export type Mutation = {
   acceptRoleBasedInvite: AcceptRoleBasedInvitePayload;
   /** Adds a comment to a post. */
   addComment: AddCommentPayload;
+  addContentBlock: AddContentBlockPayload;
   addCustomMdxComponent: AddCustomMdxComponentPayload;
   addDocumentationProjectCustomDomain: AddDocumentationProjectCustomDomainPayload;
   /** Adds a post to a series. */
@@ -3195,6 +3250,7 @@ export type Mutation = {
   /** Creates a new series. */
   createSeries: CreateSeriesPayload;
   createWebhook: CreateWebhookPayload;
+  deleteContentBlock: DeleteContentBlockPayload;
   deleteCustomMdxComponent: DeleteCustomMdxComponentPayload;
   /** Deletes a role based invite. */
   deleteRoleBasedInvite: DeleteRoleBasedInvitePayload;
@@ -3304,6 +3360,7 @@ export type Mutation = {
   unsubscribeFromNewsletter: UnsubscribeFromNewsletterPayload;
   /** Updates a comment on a post. */
   updateComment: UpdateCommentPayload;
+  updateContentBlock: UpdateContentBlockPayload;
   updateCustomMdxComponent: UpdateCustomMdxComponentPayload;
   updateDocumentationAppearance: UpdateDocumentationAppearancePayload;
   updateDocumentationGeneralSettings: UpdateDocumentationGeneralSettingsPayload;
@@ -3346,6 +3403,11 @@ export type MutationAcceptRoleBasedInviteArgs = {
 
 export type MutationAddCommentArgs = {
   input: AddCommentInput;
+};
+
+
+export type MutationAddContentBlockArgs = {
+  input: AddContentBlockInput;
 };
 
 
@@ -3436,6 +3498,11 @@ export type MutationCreateSeriesArgs = {
 
 export type MutationCreateWebhookArgs = {
   input: CreateWebhookInput;
+};
+
+
+export type MutationDeleteContentBlockArgs = {
+  input: DeleteContentBlockInput;
 };
 
 
@@ -3732,6 +3799,11 @@ export type MutationUnsubscribeFromNewsletterArgs = {
 
 export type MutationUpdateCommentArgs = {
   input: UpdateCommentInput;
+};
+
+
+export type MutationUpdateContentBlockArgs = {
+  input: UpdateContentBlockInput;
 };
 
 
@@ -4159,6 +4231,11 @@ export type Post = Node & {
   /** Returns the user details of the author of the post. */
   author: User;
   /**
+   * The banner image preference of the post. Contains banner image URL and other details.
+   * It is similar to cover image but users can decide to render banner image of single post view.
+   */
+  bannerImage?: Maybe<PostBannerImage>;
+  /**
    * Flag to indicate if the post is bookmarked by the requesting user.
    *
    * Returns `false` if the user is not authenticated.
@@ -4314,6 +4391,13 @@ export type PostBadgesFeature = Feature & {
   /** Whether or not the user has chosen to show badges on the post. */
   isEnabled: Scalars['Boolean']['output'];
   items: Array<PostBadge>;
+};
+
+/** Contains information about the banner image of the post. */
+export type PostBannerImage = {
+  __typename?: 'PostBannerImage';
+  /** The URL of the banner image. */
+  url: Scalars['String']['output'];
 };
 
 /**
@@ -5367,6 +5451,11 @@ export type PublishDraftPayload = {
 
 /** Contains information about the post to be published. */
 export type PublishPostInput = {
+  /**
+   * Options for the banner image of the post.
+   * It is similar to cover image but users can decide to render banner image of single post view.
+   */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /** Ids of the co-authors of the post. */
   coAuthors?: InputMaybe<Array<Scalars['ObjectId']['input']>>;
   /** Content of the post in markdown format. */
@@ -6496,6 +6585,18 @@ export type UpdateCommentPayload = {
   comment?: Maybe<Comment>;
 };
 
+export type UpdateContentBlockInput = {
+  content: Scalars['String']['input'];
+  embedId: Scalars['String']['input'];
+  label: Scalars['String']['input'];
+  projectId: Scalars['ID']['input'];
+};
+
+export type UpdateContentBlockPayload = {
+  __typename?: 'UpdateContentBlockPayload';
+  project: DocumentationProject;
+};
+
 export type UpdateCustomMdxComponentInput = {
   code: Scalars['String']['input'];
   componentId: Scalars['String']['input'];
@@ -6626,6 +6727,8 @@ export type UpdateDocumentationSectionPayload = {
 };
 
 export type UpdatePostInput = {
+  /** Options for the banner image of the post. */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /**
    * Update co-authors of the post.
    * Must be a member of the publication.

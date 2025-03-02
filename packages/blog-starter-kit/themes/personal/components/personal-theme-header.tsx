@@ -21,12 +21,12 @@ export const PersonalHeader = () => {
 	const navList = (
 		<ul className="flex list-none flex-row items-center gap-4 text-xs font-semibold uppercase tracking-tight text-neutral-600 dark:text-neutral-300">
 			<li>
-				<Link href="/blog" className="hover:underline">
+				<Link href="/" className="hover:underline">
 					Blog
 				</Link>
 			</li>
 			<li>
-				<Link href="/" className="hover:underline">
+				<Link href="/about" className="hover:underline">
 					About
 				</Link>
 			</li>
