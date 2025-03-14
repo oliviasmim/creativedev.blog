@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const MinimalPostPreview = ({ title, date, slug, commentCount }: Props) => {
-	const postURL = `/${slug}`;
+	const postURL = `/blog/${slug}`;
 
 	return (
 		<section className="flex flex-col items-start gap-1">

@@ -47,7 +47,7 @@ export default function Index({ publication }: Props) {
 							{publication.author.name}
 						</h1>
 						<p className="text-xl text-slate-600 dark:text-slate-400">
-							Software Developer & Educator & Artist
+							Senior Software Developer | Developer Relations | AI Engineer | Artist
 						</p>
 					</section>
 
